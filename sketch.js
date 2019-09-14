@@ -1,9 +1,8 @@
 var canvas;
 let points = [];
-let tri = [];
 
 const CONF = {
-  point_count: 40
+  point_count: 35
 }
 
 const DRAW_DATA = {
@@ -17,6 +16,7 @@ function setup() {
 }
 
 function draw() {
+  colorMode( RGB );
   background(15, 10);
 
   let pt_angle = cos( DRAW_DATA.time * 5 ) * TWO_PI;
@@ -28,34 +28,16 @@ function draw() {
   let point2 = p5.Vector.fromAngle( pt_angle, pt_radius );
   
   points = makePoints( CONF.point_count, 4 );
-  tri = makePoints( 3, -1 );
 
-  // Draw points
-  // stroke( 255, 5 );
-  // strokeWeight( 1 );
-  // for (let i = 0; i < points.length; i++) {
-  //   for (let j = 0; j < points.length; j++) {
-  //     line( points[i].x, points[i].y, points[j].x, points[j].y,  );
-  //   }
-  // }
-  // Draw tri / points
-  // stroke( 255, 5 );
-  // strokeWeight( 1 );
-  // for (let i = 0; i < tri.length; i++) {
-  //   for (let j = 0; j < points.length; j++) {
-  //     line( tri[i].x, tri[i].y, points[j].x, points[j].y,  );
-  //   }
-  // }
-  // Draw point
-  stroke( 255, 30 );
-  strokeWeight( 1 );
+  colorMode( HSB );
+  stroke( DRAW_DATA.time * 200, 60, 50, .1 );
   for (let j = 0; j < points.length; j++) {
     line( point1.x + width/2, point1.y + height/2, points[j].x, points[j].y,  );
   }
+  stroke( DRAW_DATA.time * 100 + 180, 60, 50, .1 );
   for (let j = 0; j < points.length; j++) {
     line( point2.x + width/2, point2.y + height/2, points[j].x, points[j].y,  );
   }
-  stroke( 255 );
   point( point2.x + width/2, point2.y + height/2 );
   DRAW_DATA.time += 0.001;
 }
